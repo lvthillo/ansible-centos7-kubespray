@@ -1,0 +1,39 @@
+---
+- name: setup node
+  hosts: all
+  tasks:
+
+  - name: update all packages
+    yum:
+      name: '*'
+      state: latest
+
+  - name: install network tools
+    yum:
+      name: net-tools
+
+  - name: creates .ssh directory
+    file: path=~/.ssh state=directory owner=centos group=centos mode=700
+
+  - name: copy public key to authorized keys
+    template: 
+      src: ~/.ssh/id_rsa.pub 
+      dest: "~/.ssh/authorized_keys"
+      owner: centos
+      group: centos
+      mode: 0640
+
+  # To Update
+  #- lineinfile:
+  #    path: /etc/sudoers
+  #    state: present
+  #    regexp: '^%wheel  ALL=(ALL)       ALL'
+  #    line: '#%wheel  ALL=(ALL)       ALL'
+  #  become: yes
+
+  #- lineinfile:
+  #    path: /etc/sudoers
+  #    state: present
+  #    regexp: '^# %wheel        ALL=(ALL)       NOPASSWD: ALL'
+  #    line: '%wheel        ALL=(ALL)       NOPASSWD: ALL'
+  #  become: yes
