@@ -11,6 +11,10 @@
   - name: install network tools
     yum:
       name: net-tools
+ 
+  - name: turn off firewall for install
+    command: systemctl disable firewalld
+    become: yes
 
   - name: creates .ssh directory
     file: path=~/.ssh state=directory owner=centos group=centos mode=700
@@ -23,17 +27,27 @@
       group: centos
       mode: 0640
 
-  # To Update
-  #- lineinfile:
-  #    path: /etc/sudoers
-  #    state: present
-  #    regexp: '^%wheel  ALL=(ALL)       ALL'
-  #    line: '#%wheel  ALL=(ALL)       ALL'
-  #  become: yes
+  - replace:
+      path: /etc/sudoers
+      regexp: '^#\s*%wheel\s*ALL=\(ALL\)\s*NOPASSWD:\s*ALL$'
+      replace: '%wheel        ALL=(ALL)       NOPASSWD: ALL'
+    become: yes
 
-  #- lineinfile:
-  #    path: /etc/sudoers
-  #    state: present
-  #    regexp: '^# %wheel        ALL=(ALL)       NOPASSWD: ALL'
-  #    line: '%wheel        ALL=(ALL)       NOPASSWD: ALL'
-  #  become: yes
+  - replace:
+      path: /etc/sudoers
+      regexp: '^%wheel\s*ALL=\(ALL\)\s*ALL$'
+      replace: '# %wheel  ALL=(ALL)       ALL'
+    become: yes
+
+  - replace:
+      path: /etc/fstab
+      regexp: '^/dev/mapper/centos-swap\s*swap\s*swap\s*defaults\s*[0-9]\s*[0-9]$'
+      replace: '# /dev/mapper/centos-swap swap                    swap    defaults        0 0'
+    become: yes  
+
+  - name: restart server
+    command: /sbin/shutdown -r +1
+    async: 0
+    poll: 0
+    ignore_errors: true
+    become: yes
