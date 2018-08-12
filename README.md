@@ -1,2 +1,3 @@
-# vmware-local-kubernetes
-Local setup of Kubernetes using VMware Fusion, ansible and Kubespray
+# ansible-centos7-kubespray
+
+Ansible playbook to configure prerequisites for Kubespray on CentOS7
