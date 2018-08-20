@@ -44,14 +44,14 @@
     become: yes
 
   - name: creates .ssh directory
-    file: path=~/.ssh state=directory owner=centos group=centos mode=700
+    file: path=~/.ssh state=directory owner="{{ user }}" group="{{ group }}" mode=700
 
   - name: copy public key to authorized keys
     template:
-      src: ~/.ssh/id_rsa.pub
+      src: "{{ pubkeypath }}"
       dest: "~/.ssh/authorized_keys"
-      owner: centos
-      group: centos
+      owner: "{{ user }}"
+      group: "{{ group }}"
       mode: 0640
 
   - replace:
