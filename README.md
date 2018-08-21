@@ -40,6 +40,7 @@ $ git checkout v2.6.0
 
 Follow the instructions described in the README.md
 
+```
 # Install dependencies from ``requirements.txt``
 $ sudo pip install -r requirements.txt
 
@@ -77,8 +78,9 @@ node1
 node2
 node3
 
+
 # Deploy Kubespray with Ansible Playbook. In my case with the centos user.
 $ ansible-playbook -u centos -b -i inventory/mycluster/hosts.ini cluster.yml
 
-More details and configuration can be in this blog.
+More details and configuration can be in [this blog](https://medium.com/@lvthillo/install-kubernetes-on-bare-metal-centos7-fba40e9bb3de).
 
