@@ -77,10 +77,11 @@ kube-master
 node1
 node2
 node3
+```
 
-
-# Deploy Kubespray with Ansible Playbook. In my case with the centos user.
+Deploy Kubespray with Ansible Playbook.
+```
 $ ansible-playbook -u centos -b -i inventory/mycluster/hosts.ini cluster.yml
+```
 
 More details and configuration can be in [this blog](https://medium.com/@lvthillo/install-kubernetes-on-bare-metal-centos7-fba40e9bb3de).
-
