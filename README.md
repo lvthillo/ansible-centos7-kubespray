@@ -35,7 +35,7 @@ After running the playbook you can start with [Kubespray](https://github.com/kub
 ```
 $ git clone https://github.com/kubernetes-incubator/kubespray
 $ cd kubespray
-$ git checkout v2.6.0
+$ git checkout v2.7.0
 ```
 
 Follow the instructions described in the README.md
@@ -84,4 +84,4 @@ Deploy Kubespray with Ansible Playbook.
 $ ansible-playbook -u centos -b -i inventory/mycluster/hosts.ini cluster.yml
 ```
 
-More details and configuration can be in [this blog](https://medium.com/@lvthillo/install-kubernetes-on-bare-metal-centos7-fba40e9bb3de).
+More details and configuration can be found [here](https://medium.com/@lvthillo/install-kubernetes-on-bare-metal-centos7-fba40e9bb3de).
